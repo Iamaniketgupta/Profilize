@@ -1,5 +1,5 @@
 import ToolBar from "./ToolBar";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import PersonalDetails from "./sections/PersonalDetails";
 import WorkExperience from "./sections/WorkExperience";
 import Education from "./sections/Education";
@@ -16,6 +16,7 @@ import { FaCloudDownloadAlt } from "react-icons/fa";
 
 const Editor = () => {
 
+
     //color State
     const colors = ["black", "navy", "#c33434", "#5a2e7c", "#2a678d"]
 
@@ -24,11 +25,21 @@ const Editor = () => {
 
     // state for the tabs
     const [activeSection, setActiveSection] = useState(Object.keys(sections)[0]);
+
     // state to have the main data values
-    const [resumeInfo, setResumeInfo] = useState(resData);
+    const [resumeInfo, setResumeInfo] = useState(() => {
+        // Load data from local storage if available, otherwise use default data
+        const storedData = localStorage.getItem("resumeData");
+        return storedData ? JSON.parse(storedData) : resData;
+    });
 
     //state to track current section object
     const [currValues, setCurrValues] = useState({ ...resumeInfo[activeSection] })
+
+    // Update local storage when resume data changes
+    useEffect(() => {
+        localStorage.setItem("resumeData", JSON.stringify(resumeInfo));
+    }, [resumeInfo]);
 
 
     const myref = useRef(null);
@@ -137,9 +148,7 @@ const Editor = () => {
                                 currValues={currValues}
                             /></div>)}
 
-
                     </div>
-
 
                 </div>
 
@@ -148,10 +157,10 @@ const Editor = () => {
                         <div className="w-fit bg-gradient-to-r from-pink-700 to-blue-600 rounded-3xl p-[1.5px] m-3">
                             <button onClick={useReactToPrint({
                                 content: () => myref.current,
-                            })} 
-                            className=' min-w-15 min-h-fit px-10 py-2 inline-block
+                            })}
+                                className=' min-w-15 min-h-fit px-10 py-2 inline-block
                     bg-gradient-to-l from-orange-400 to-yellow-400 rounded-3xl text-white font-semibold'>Download</button>
-                        <FaCloudDownloadAlt size={30} className="animate-bounce text-white inline-block mx-2"/>
+                            <FaCloudDownloadAlt size={30} className="animate-bounce text-white inline-block mx-2" />
                         </div>
                     </div>
 
