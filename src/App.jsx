@@ -5,14 +5,15 @@ import Home from "./components/Home.jsx";
 import Editor from "./components/Editor.jsx";
 function App() {
   return (
-    <div className=''>
+    <div className=' '>
       <Header />
-      <div className='w-screen absolute '>
+      <div className='w-screen h-fit overflow-x-clip'>
         <Routes  >
           <Route path={'/'} element={<Home />} />
           <Route path={'/editor'} element={<Editor />} />
         </Routes>
       </div>
+
     </div>
   );
 }

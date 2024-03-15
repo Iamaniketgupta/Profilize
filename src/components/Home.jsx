@@ -6,7 +6,9 @@ import img3 from "../assets/img3.png";
 import InfoBox from "./subComponents/InfoBox";
 import { Link } from "react-router-dom";
 import Slider from "./Slider";
-import Button from "./subComponents/Button";
+import Footer from "./footer/Footer";
+
+// import Button from "./subComponents/Button";
 import FAQ from "./FAQ";
 const Home = () => {
     return (
@@ -86,7 +88,9 @@ const Home = () => {
                 <FAQ />
             </section>
 
+            <Footer/>
         </div >
+
     );
 }
 

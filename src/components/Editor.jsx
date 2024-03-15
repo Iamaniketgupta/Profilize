@@ -13,22 +13,21 @@ import ResumePage from "./ResumePage";
 import { useReactToPrint } from "react-to-print";
 import { FaCloudDownloadAlt } from "react-icons/fa";
 
-
 const Editor = () => {
 
 
-    //color State
-    const colors = ["black", "navy", "#c33434", "#5a2e7c", "#2a678d"]
+    const colors = ["#000000", "#c33434", "#5a2e7c", "#2a678d"]
 
-    // const [color, setColor] = useState(colors);
-    const [selectedColor, setSelectedColor] = useState(colors[0]);
+    const [selectedColor, setSelectedColor] = useState(() => {
+        const storedColor = localStorage.getItem("resumeColor");
+        return storedColor ? storedColor : colors[0];
+    });
 
     // state for the tabs
     const [activeSection, setActiveSection] = useState(Object.keys(sections)[0]);
 
     // state to have the main data values
     const [resumeInfo, setResumeInfo] = useState(() => {
-        // Load data from local storage if available, otherwise use default data
         const storedData = localStorage.getItem("resumeData");
         return storedData ? JSON.parse(storedData) : resData;
     });
@@ -68,10 +67,11 @@ const Editor = () => {
         setCurrValues(resumeInfo[key]);
     }
 
+    console.log(resumeInfo)
     return (
-        <div className="relative w-full bg-white h-[100vh]">
+        <div className="relative w-screen bg-white ">
             <ToolBar colors={colors} selectedColor={selectedColor} setSelectedColor={setSelectedColor}></ToolBar>
-            <div className=" w-full flex flex-wrap gap-5 p-5 h-full">
+            <div className=" w-full flex flex-wrap gap-5">
                 <div className="flex flex-col w-full min-w-300px max-w-[600px]">
                     {/* Tabs */}
                     <div className="flex gap-3 m-4 flex-wrap">
@@ -152,8 +152,8 @@ const Editor = () => {
 
                 </div>
 
-                <div className="flex-1 m-2 rounded-md shadow-md">
-                    <div className="w-full bg-gradient-to-r from-pink-100 to-orange-200 p-0 border-2 ">
+                <div className=" max-w-[850px] rounded-md shadow-md max-h-[1100px] w-screen min-w-[300px] ">
+                    <div className=" bg-gradient-to-r from-pink-100 to-orange-200 p-0 border-2 ">
                         <div className="w-fit bg-gradient-to-r from-pink-700 to-blue-600 rounded-3xl p-[1.5px] m-3">
                             <button onClick={useReactToPrint({
                                 content: () => myref.current,
@@ -170,7 +170,8 @@ const Editor = () => {
 
             </div>
 
-        </div>
+            
+            </div>
     );
 }
 
