@@ -16,22 +16,28 @@ const WorkExperience = (props) => {
 
     function handleWorkDataChange(e, index) {
         const { name, value } = e.target;
-        // Create a copy of the current values array
         const updatedDetails = [...currValues.detail];
 
-        // Update the specific project's data
         updatedDetails[index] = {
             ...updatedDetails[index],
             [name]: value,
         };
 
-        // Update the state with the modified array
         setCurrValues((prev) => ({
             ...prev,
             detail: updatedDetails
         }));
     }
 
+    const handleWorkSummaryChange = (html, index) => {
+        setCurrValues((prev) => ({
+            ...prev,
+            detail: prev.detail.map((item, i) =>
+                i === index ? { ...item, work_summary: html } : item
+            ),
+        }));
+    };
+    
 
     const handleAddWork = () => {
         const newProject = {
@@ -56,6 +62,7 @@ const WorkExperience = (props) => {
         setCurrValues((prev) => ({ ...prev, detail: [...filteredData] }))
     }
 
+    console.log(currValues)
 
     return (
         <form onSubmit={(e) => handleSave(e)}>
@@ -122,7 +129,7 @@ const WorkExperience = (props) => {
                     <p className='mx-6 py-3'>Write Some Description about Work</p>
                     <TextEditor name={"work_summary"}
                         value={currValues?.detail[index]?.work_summary}
-                        onChange={(html) => setCurrValues((prev) => ({ ...prev, detail: [{ ...prev.detail[index], work_summary: html }] }))}
+                        onChange={(html) => handleWorkSummaryChange(html, index)}
                     />
 
                     <div>

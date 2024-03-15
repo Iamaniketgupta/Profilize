@@ -5,7 +5,6 @@ import 'react-quill/dist/quill.snow.css';
 
 function TextEditor(props) {
   const { onChange, value } = props;
-
   const modules = {
     toolbar: [
       [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],

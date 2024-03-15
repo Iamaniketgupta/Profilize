@@ -67,7 +67,6 @@ const Editor = () => {
         setCurrValues(resumeInfo[key]);
     }
 
-    console.log(resumeInfo)
     return (
         <div className="relative w-screen bg-white ">
             <ToolBar colors={colors} selectedColor={selectedColor} setSelectedColor={setSelectedColor}></ToolBar>
