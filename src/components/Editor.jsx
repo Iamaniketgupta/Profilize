@@ -151,7 +151,7 @@ const Editor = () => {
 
                 </div>
 
-                <div className=" max-w-[850px] rounded-md shadow-md max-h-[1100px] w-screen min-w-[300px] ">
+                <div className=" max-w-[850px] rounded-md shadow-md max-h-[1200px] py-2 w-screen min-w-[300px] ">
                     <div className=" bg-gradient-to-r from-pink-100 to-orange-200 p-0 border-2 ">
                         <div className="w-fit bg-gradient-to-r from-pink-700 to-blue-600 rounded-3xl p-[1.5px] m-3">
                             <button onClick={useReactToPrint({

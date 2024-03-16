@@ -7,7 +7,6 @@ import AddButton from "../subComponents/AddButton";
 import DeleteButton from "../subComponents/DeleteButton";
 import SaveButton from "../subComponents/SaveButton";
 
-
 const Education = (props) => {
     const { handleSave, handleTitleChange, setCurrValues, currValues } = props;
 
@@ -120,22 +119,23 @@ const Education = (props) => {
 
                     <InputComponent
                         onChange={(e) => handleEduDataChange(e, index)}
+                        name={"score"}
                         value={item?.score}
                         type={"text"}
                         label={"Score in CGPA or % age"}
                         placeholder={"e.g. CGPA 8.5 or only write 95% "}
                         id={"score"}
-                        name={"score"} />
+                    ></InputComponent>
 
 
-                        <div>
-                            <DeleteButton onClick={()=>handleRemoveEducation(index)}/>
-                        </div>
+                    <div>
+                        <DeleteButton onClick={() => handleRemoveEducation(index)} />
+                    </div>
                 </div>
-                
-                )
+
+            )
             }
-            
+
             <AddButton onClick={handleAddEducation} />
             <SaveButton />
 

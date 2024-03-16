@@ -19,7 +19,7 @@ const Others = (props) => {
                 label={"Title"} name={"title"} id={"title"}
                 placeholder={"Section Title"} />
 
-            <TextEditor value={currValues?.detail} onChange={setfunction}
+            <TextEditor value={currValues?.detail} onChange={(html)=>setfunction(html)}
             />
             <SaveButton />
         </form>

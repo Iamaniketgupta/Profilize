@@ -15,23 +15,28 @@ const Projects = (props) => {
 
     function handleProjDataChange(e, index) {
         const { name, value } = e.target;
-        // Create a copy of the current values array
         const updatedDetails = [...currValues.detail];
 
-        // Update the specific project's data
         updatedDetails[index] = {
             ...updatedDetails[index],
             [name]: value,
         };
-
-        // Update the state with the modified array
+      
         setCurrValues((prev) => ({
             ...prev,
             detail: updatedDetails
         }));
     }
 
-
+    function handleProjectDescChange (html, index) {
+        setCurrValues((prev) => ({
+            ...prev,
+            detail: prev.detail.map((item, i) =>
+                i === index ? { ...item, project_desc: html } : item
+            ),
+        }));
+    }
+    
     const handleAddProjects = () => {
         const newProject = {
             id: uuidv4(),
@@ -98,21 +103,22 @@ const Projects = (props) => {
 
 
                         <p className='mx-6 py-3'>Write Some Description about Project</p>
+                        
                         <TextEditor name={"project_desc"}
                             value={currValues?.detail[index]?.project_desc}
-                            onChange={(html)=>setCurrValues((prev)=>({...prev,detail:[{...prev.detail[index],project_desc:html}]}))}
+                            onChange={(html) => handleProjectDescChange(html, index)}
                         />
 
-                       
-<div>
-                            <DeleteButton onClick={()=>handleRemoveProjects(index)}/>
+
+                        <div>
+                            <DeleteButton onClick={() => handleRemoveProjects(index)} />
                         </div>
-                </div>
-                
+                    </div>
+
                 )
             }
-            
-            <AddButton onClick={handleAddProjects} title={"Add Projects"}/>
+
+            <AddButton onClick={handleAddProjects} title={"Add Projects"} />
 
 
             <SaveButton />

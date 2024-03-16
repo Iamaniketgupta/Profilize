@@ -46,24 +46,17 @@ const ResumePage = forwardRef(function ResumePage(props, ref) {
     )
 
     const projectSection = (
-        <section className="h-fit mt-3 min-w-full " key={"projects"}>
+        <section className="h-fit mt-2 min-w-full " key={"projects"}>
 
             <div className="text-xl font-bold " style={{ color: color }}>{data.projects.title}
                 {data.projects.title && <div className="h-[1.5px] bg-black min-w-full mt-2"></div>}
             </div>
             {data.projects.detail?.map((item) =>
-                <div className="w-full my-2 p-1" key={item.id}>
-                    <p className="inline-block font-semibold text-lg">Resume Builder</p> | <a href={item.project_live_link} className="font-medium" style={{ color: color }}>Live</a> | <a href={item.project_code_link} className="font-medium" style={{ color: color }}>
+                <div className="w-full my-1 p-1" key={item.id}>
+                    <p className="inline-block font-semibold text-lg">{item?.project_title}</p> | <a href={item.project_live_link} className="font-medium" style={{ color: color }}>Live</a> | <a href={item.project_code_link} className="font-medium" style={{ color: color }}>
                         Code</a>
-                    <div>
+                    <div dangerouslySetInnerHTML={{ __html: item?.project_desc }}></div>
 
-                        <ul style={{ listStyleType: "disc" }} className="px-2 my-2 leading-4">
-                            <li className="mb-1">An application that fetches and displays details of countries including their flags using the countries API</li>
-                            <li className="mb-1">Implemented a fully responsive multi-page layout to ensure an optimal user experience across devices.</li>
-                            <li className="mb-1">Implemented Search, Filter and Dark Mode features to enhance the user experience.</li>
-                            <li className="mb-1">Leveraged React</li>
-                        </ul>
-                    </div>
 
                 </div>)}
 
@@ -87,17 +80,16 @@ const ResumePage = forwardRef(function ResumePage(props, ref) {
 
                         <p className="my-1">{item.degree} in {item.branch}</p>
                         <p className="">{item.score}</p>
-
                     </div>
                 )
             }
 
-         
+
 
         </section>
     )
     const skillsSection = (
-        <section className="h-20 mt-3 min-w-full" key={"skills"}>
+        <section className="h-fit m-2 min-w-full" key={"skills"}>
             <div className="text-xl font-bold " style={{ color: color }}>{data.skills.title}
                 {data.skills.title && <div className="h-[1.5px] bg-black min-w-full mt-2"></div>}
             </div>
@@ -110,7 +102,7 @@ const ResumePage = forwardRef(function ResumePage(props, ref) {
                         )
 
                     }
-  
+
                 </ul>
             </div>
 
@@ -119,17 +111,16 @@ const ResumePage = forwardRef(function ResumePage(props, ref) {
 
 
     const workExpSection = (
-        <section className="h-fit mt-3 min-w-full " key={"work_experience"}>
+        <section className="h-fit mt-2 min-w-full " key={"work_experience"}>
             <div className="text-xl font-bold min-w-full " style={{ color: color }}>{data.work_experience.title || ''}
                 {data.work_experience.title && <div className="h-[1.5px] bg-black min-w-full mt-2"></div>}
             </div>
 
             {
                 data.work_experience.detail?.map((item) =>
-                    <div className="w-full my-2 p-1" key={item.id}>
+                    <div className="w-full h-fit my-1 p-1" key={item.id}>
                         <p className="inline-block font-semibold text-base"> <span className="text-sm" style={{ color: color }}> {item?.start_year + "-" + item?.end_year} </span> {(" | " + item?.position_title)} {(" | " + item?.company_name)} </p>
-                        <div dangerouslySetInnerHTML={{__html:item?.work_summary}}></div>
-
+                        <div dangerouslySetInnerHTML={{ __html: item?.work_summary }}></div>
 
                     </div>
                 )}
@@ -156,7 +147,7 @@ const ResumePage = forwardRef(function ResumePage(props, ref) {
 
                         )
                     }
-          
+
                 </ul>
 
             </div>
@@ -171,24 +162,17 @@ const ResumePage = forwardRef(function ResumePage(props, ref) {
             <div className="text-xl font-bold " style={{ color: color }}>{data.other.title}
                 {data.other.title && <div className="h-[1.5px] bg-black min-w-full mt-2"></div>}
             </div>
-            {/* <div>
-                Lorem ipsum dolor sit, amet
-                consectetur adipisicing elit.
-                Voluptatibus eligendi tempore libero! Cupiditate sed atque n
-                ihil temporibus cum, ullam dolores tempore, ipsum, susci
-                pit doloremque aperiam quae placeat commodi maiores beatae!
-
-            </div> */}
+                <div className="my-1" dangerouslySetInnerHTML={{ __html: data.other.detail }}></div>
         </section>
     )
 
     useEffect(() => {
         setColumn([
             [
-                educationSection, projectSection, skillsSection, AchievmentsSection
+                educationSection, projectSection, skillsSection
             ],
             [
-                workExpSection, otherSection
+                workExpSection, AchievmentsSection,otherSection
             ]
         ])
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -196,8 +180,8 @@ const ResumePage = forwardRef(function ResumePage(props, ref) {
 
 
     return (
-        <div ref={ref} className="h-full bg-white p-5  overflow-x-scroll no-scrollbar  "
-            style={{ scrollbarWidth: "none", msOverflowStyle: "none",  }}>
+        <div ref={ref} className="h-full bg-white p-5 overflow-x-scroll no-scrollbar  "
+            style={{ scrollbarWidth: "none"}}>
             {
                 PersonalDetailsSection
             }
